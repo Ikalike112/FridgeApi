@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FridgeApi", "FridgeApi\Frid
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{BA5B59FE-B8A3-4EF5-9A0A-BDB4B37E17E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistance\Persistence.csproj", "{96D3206A-AFED-465B-9139-5EF56FF96A17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{1E8C7593-5D42-4296-AF50-912797342935}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{BA5B59FE-B8A3-4EF5-9A0A-BDB4B37E17E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA5B59FE-B8A3-4EF5-9A0A-BDB4B37E17E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA5B59FE-B8A3-4EF5-9A0A-BDB4B37E17E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96D3206A-AFED-465B-9139-5EF56FF96A17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96D3206A-AFED-465B-9139-5EF56FF96A17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96D3206A-AFED-465B-9139-5EF56FF96A17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96D3206A-AFED-465B-9139-5EF56FF96A17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E8C7593-5D42-4296-AF50-912797342935}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E8C7593-5D42-4296-AF50-912797342935}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E8C7593-5D42-4296-AF50-912797342935}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E8C7593-5D42-4296-AF50-912797342935}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

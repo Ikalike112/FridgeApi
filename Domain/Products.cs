@@ -12,8 +12,7 @@ namespace Domain
         public Guid Id { get; set; }
         [Required]
         public string Name { get; set; }
-        [Required]
-        public int DefaultQuantity { get; set; }
+        public int? DefaultQuantity { get; set; }
         public ICollection<FridgeProducts> FridgeProducts { get; set; }
     }
 }

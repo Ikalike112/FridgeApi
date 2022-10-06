@@ -11,11 +11,11 @@ namespace Domain
     {
         public Guid Id { get; set; }
         [Required]
-        public Guid ProductId { get; set; }
+        public Guid ProductsId { get; set; }
         [Required]
         public Guid FridgeId { get; set; }
         [Required]
-        public int Quantity { get; set; }
+        public int? Quantity { get; set; }
         public Fridge Fridge { get; set; }
         public Products Products { get; set; }
     }
