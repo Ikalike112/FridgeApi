@@ -1,3 +1,4 @@
+using FridgeApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -27,7 +28,11 @@ namespace FridgeApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddInfrastructureServices(Configuration);
+            services.ConfigureCors();
+            services.ConfigureLoggerService();
+            services.ConfigureSqlContext(Configuration);
+
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -46,7 +51,9 @@ namespace FridgeApi
             }
 
             app.UseHttpsRedirection();
-
+            app.UseStaticFiles();
+            app.UseCors();
+           
             app.UseRouting();
 
             app.UseAuthorization();
