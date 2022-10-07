@@ -1,4 +1,4 @@
-﻿using FridgeApi.Interfaces;
+﻿using Application.Interfaces;
 using FridgeApi.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -30,7 +30,10 @@ services.AddScoped<ILoggerManager, LoggerManager>();
                 options.UseSqlServer(connectionString, migration =>
                         migration.MigrationsAssembly("Persistence"));
             });
+            services.AddScoped<IFridgeDbContext>(provider =>
+provider.GetService<FridgeDbContext>());
             return services;
         }
+
     }
 }

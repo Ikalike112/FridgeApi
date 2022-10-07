@@ -1,4 +1,4 @@
-﻿namespace FridgeApi.Interfaces
+﻿namespace Application.Interfaces
 {
     public interface ILoggerManager
     {

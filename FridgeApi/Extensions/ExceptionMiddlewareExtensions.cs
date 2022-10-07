@@ -1,5 +1,5 @@
 ﻿using Domain.ErrorModel;
-using FridgeApi.Interfaces;
+using Application.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
@@ -22,7 +22,7 @@ namespace FridgeApi.Extensions
                     if (contextFeature != null)
                     {
                         logger.LogError($"Something went wrong: {contextFeature.Error}");
-                        await context.Response.WriteAsync(new ErrorDetails()s
+                        await context.Response.WriteAsync(new ErrorDetails()
                         {
                             StatusCode = context.Response.StatusCode,
                             Message = "Internal Server Error."

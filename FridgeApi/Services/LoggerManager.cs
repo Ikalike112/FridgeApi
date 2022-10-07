@@ -1,4 +1,4 @@
-﻿using FridgeApi.Interfaces;
+﻿using Application.Interfaces;
 using NLog;
 
 namespace FridgeApi.Services

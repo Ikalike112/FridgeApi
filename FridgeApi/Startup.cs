@@ -1,4 +1,7 @@
+using Application.Interfaces;
+using FridgeApi.AutoMapperProfile;
 using FridgeApi.Extensions;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +15,7 @@ using Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace FridgeApi
@@ -31,7 +35,11 @@ namespace FridgeApi
             services.ConfigureCors();
             services.ConfigureLoggerService();
             services.ConfigureSqlContext(Configuration);
-
+            services.AddAutoMapper(config =>
+            {
+                config.AddProfile(new MappingProfile());
+            });
+            services.AddMediatR(typeof(IFridgeDbContext).GetTypeInfo().Assembly);
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -41,7 +49,8 @@ namespace FridgeApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
+            ILoggerManager logger)
         {
             if (env.IsDevelopment())
             {
@@ -50,13 +59,15 @@ namespace FridgeApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FridgeApi v1"));
             }
 
+            app.ConfigureExceptionHandler(logger);
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
             app.UseCors();
            
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
