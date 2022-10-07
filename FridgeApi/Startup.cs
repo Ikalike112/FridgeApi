@@ -1,4 +1,5 @@
 using Application.Interfaces;
+using Filters.ActionFilters;
 using FridgeApi.AutoMapperProfile;
 using FridgeApi.Extensions;
 using MediatR;
@@ -40,6 +41,9 @@ namespace FridgeApi
                 config.AddProfile(new MappingProfile());
             });
             services.AddMediatR(typeof(IFridgeDbContext).GetTypeInfo().Assembly);
+
+            services.AddScoped<ValidateFridgeProductExistsAttribute>();
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

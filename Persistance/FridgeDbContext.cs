@@ -15,7 +15,7 @@ namespace Persistence
         public DbSet<Fridge> Fridges { get; set; }
         public DbSet<FridgeModel> FridgeModels { get; set; }
         public DbSet<FridgeProducts> FridgeProducts { get; set; }
-        public DbSet<Products> Products { get; set; }
+        public DbSet<Product> Products { get; set; }
         public FridgeDbContext(DbContextOptions<FridgeDbContext> options) : base(options)
         {
         }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Fridges.Queries.GetFridges
 {
-    public class GetFridgesQuery : IRequest<IEnumerable<FridgeDto>>
+    public record GetFridgesQuery : IRequest<IEnumerable<FridgeDto>>
     {
     }
 }

@@ -9,22 +9,14 @@ using System.Threading.Tasks;
 
 namespace FridgeApi.Controllers
 {
-    [Route("api/fridges")]
+    [Route("api/[controller]")]
     [ApiController]
     public class FridgeController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly IMapper _mapper;
-        private readonly ILoggerManager _loggerManager;
-        private readonly IFridgeDbContext _db;
-        public FridgeController(IMediator mediator
-            , IMapper mapper, IFridgeDbContext db
-            , ILoggerManager logger)
+        public FridgeController(IMediator mediator)
         {
             _mediator=mediator;
-            _mapper=mapper; 
-            _db=db;
-            _loggerManager=logger;
         }
         [HttpGet]
         public async Task<ActionResult<FridgeDto>> GetFridges()
