@@ -15,6 +15,7 @@ using Microsoft.OpenApi.Models;
 using Persistence;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -42,12 +43,14 @@ namespace FridgeApi
             });
             services.AddMediatR(typeof(IFridgeDbContext).GetTypeInfo().Assembly);
 
-            services.AddScoped<ValidateFridgeProductExistsAttribute>();
-
+            services.ConfigureActionFilters();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "FridgeApi", Version = "v1" });
             });
         }

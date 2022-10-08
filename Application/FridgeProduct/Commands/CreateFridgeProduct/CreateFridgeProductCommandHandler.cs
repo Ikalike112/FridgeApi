@@ -14,13 +14,9 @@ namespace Application.FridgeProduct.Commands.CreateFridgeProduct
     public class CreateFridgeProductCommandHandler : IRequestHandler<CreateFridgeProductCommand, Guid>
     {
         private readonly IFridgeDbContext _db;
-        private readonly IMapper _mapper;
-        private readonly ILoggerManager _loggerManager;
-        public CreateFridgeProductCommandHandler(IFridgeDbContext db, IMapper mapper, ILoggerManager logger)
+        public CreateFridgeProductCommandHandler(IFridgeDbContext db)
         {
             _db = db;
-            _mapper = mapper;
-            _loggerManager = logger;
         }
         public async Task<Guid> Handle(CreateFridgeProductCommand request, CancellationToken cancellationToken)
         {

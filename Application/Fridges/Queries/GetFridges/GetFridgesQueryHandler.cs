@@ -16,20 +16,14 @@ namespace Application.Fridges.Queries.GetFridges
     {
         private readonly IFridgeDbContext _db;
         private readonly IMapper _mapper;
-        private readonly ILoggerManager _loggerManager;
-        public GetFridgesQueryHandler(IFridgeDbContext db, IMapper mapper, ILoggerManager logger)
+        public GetFridgesQueryHandler(IFridgeDbContext db, IMapper mapper)
         {
             _db = db;
-            _mapper = mapper;
-            _loggerManager = logger;    
+            _mapper = mapper; 
         }
         public async Task<IEnumerable<FridgeDto>> Handle(GetFridgesQuery request, CancellationToken cancellationToken)
         {
-            var fridges = await _db.Fridges.ToListAsync();
-            if (fridges == null)
-            {
-                _loggerManager.LogError("Fridges in the database is null.");
-            }
+            var fridges = await _db.Fridges.AsNoTracking().ToListAsync();
 
             var fridgesDto = _mapper.Map<IEnumerable<FridgeDto>>(fridges);
 

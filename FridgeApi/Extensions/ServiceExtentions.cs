@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using Filters.ActionFilters;
 using FridgeApi.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -21,7 +22,7 @@ namespace FridgeApi.Extensions
         }
         public static void ConfigureLoggerService(this IServiceCollection services) =>
 services.AddScoped<ILoggerManager, LoggerManager>();
-        public static IServiceCollection ConfigureSqlContext(this IServiceCollection services,
+        public static void ConfigureSqlContext(this IServiceCollection services,
    IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("DbConnection");
@@ -32,8 +33,14 @@ services.AddScoped<ILoggerManager, LoggerManager>();
             });
             services.AddScoped<IFridgeDbContext>(provider =>
 provider.GetService<FridgeDbContext>());
-            return services;
         }
+        public static void ConfigureActionFilters(this IServiceCollection services)
+        {
+            services.AddScoped<ValidateFridgeProductForCreateAttribute>();
+            services.AddScoped<ValidateFridgeProductExistsAttribute>();
+            services.AddScoped<ValidateProductExistsAttribute>();
+            services.AddScoped<ValidateFridgeModelForCreateAttribute>();
 
+        }
     }
 }

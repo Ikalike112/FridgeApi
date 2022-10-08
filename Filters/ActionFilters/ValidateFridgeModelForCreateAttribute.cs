@@ -7,17 +7,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domain.DTOs;
 using Microsoft.EntityFrameworkCore;
-using Domain;
 
 namespace Filters.ActionFilters
 {
-    public class ValidateFridgeProductExistsAttribute : IAsyncActionFilter
+    public class ValidateFridgeModelForCreateAttribute : IAsyncActionFilter
     {
         private readonly IFridgeDbContext _db;
         private readonly ILoggerManager _loggerManager;
 
-        public ValidateFridgeProductExistsAttribute(IFridgeDbContext db,
+        public ValidateFridgeModelForCreateAttribute(IFridgeDbContext db,
             ILoggerManager loggerManager)
         {
             _db = db;
@@ -27,16 +27,16 @@ namespace Filters.ActionFilters
         public async Task OnActionExecutionAsync(ActionExecutingContext context,
             ActionExecutionDelegate next)
         {
-            var id = (Guid)context.ActionArguments["id"];
-            var FridgeProduct = await _db.FridgeProducts.Where(f => f.Id == id).FirstOrDefaultAsync();
+            var fridgeDto = context.ActionArguments["createFridge"] as FridgeForCreateDto;
+            var fridgeModel = await _db.FridgeModels.Where(f => f.Id == fridgeDto.FridgeModelId).FirstOrDefaultAsync();
 
-            if (FridgeProduct == null)
+            if (fridgeModel == null)
             {
-                _loggerManager.LogInfo($"FridgeProduct with id: {id} doesn't exist in the database");
-                context.Result = new NotFoundObjectResult($"FridgeProduct with id: {id} doesn't exist in the database");
+                _loggerManager.LogInfo($"FridgeModel with id: {fridgeDto.FridgeModelId} doesn't exist in the database");
+                context.Result = new NotFoundObjectResult($"FridgeModel with id: {fridgeDto.FridgeModelId} doesn't exist in the database");
                 return;
             }
-            context.HttpContext.Items.Add("FridgeProduct", FridgeProduct);
+
             await next();
         }
     }
