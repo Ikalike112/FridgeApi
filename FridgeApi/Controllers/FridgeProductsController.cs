@@ -1,8 +1,11 @@
 ﻿using Application.FridgeProduct.Commands.CreateFridgeProduct;
 using Application.FridgeProduct.Commands.DeleteFridgeProduct;
+using Application.FridgeProduct.Commands.UpdateFridgeProduct;
+using Application.FridgeProduct.Queries.GetFridgeProducts;
 using Application.FridgeProduct.Queries.GetFridgeProductsById;
 using Domain;
-using Filters.ActionFilters;
+using Domain.DTOs;
+using Filters.ActionFilters.FridgeProductFilters;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +32,13 @@ namespace FridgeApi.Controllers
             var vm = await _mediator.Send(query);
             return Ok(vm);
         }
-
+        [HttpGet]
+        public async Task<ActionResult> GetAll()
+        {
+            var query = new GetFridgeProductsQuery();
+            var vm = await _mediator.Send(query);
+            return Ok(vm);
+        }
         /// <summary>
         /// Delete FridgeProduct from Database
         /// </summary>
@@ -63,11 +72,26 @@ namespace FridgeApi.Controllers
         /// <returns>Return Id if result success</returns>
         /// <response code="200">Returns the Id</response>
         [HttpPost]
-        [ServiceFilter(typeof(ValidateFridgeProductForCreateAttribute))]
-        public async Task<ActionResult<Guid>> Create([FromBody] CreateFridgeProductCommand createFridgeProduct)
+        [ServiceFilter(typeof(ValidateFridgeProductForManipulateAttribute))]
+        public async Task<ActionResult<Guid>> Create([FromBody] FridgeProductForManipulateDto fridgeProductDto)
         {
-            var fridgeproductId = await _mediator.Send(createFridgeProduct);
+            var command = new CreateFridgeProductCommand() { fridgeProduct = fridgeProductDto};
+            var fridgeproductId = await _mediator.Send(command);
             return Ok(fridgeproductId);
+        }
+        [HttpPut("{id}")]
+        [ServiceFilter(typeof(ValidateFridgeProductForManipulateAttribute))]
+        [ServiceFilter(typeof(ValidateFridgeProductExistsAttribute))]
+        public async Task<ActionResult> Update(Guid id, [FromBody] FridgeProductForManipulateDto fridgeProductDto)
+        {
+            var fridgeProduct = HttpContext.Items["FridgeProduct"] as FridgeProducts;
+            var query = new UpdateFridgeProductCommand()
+            {
+                fridgeDto = fridgeProductDto,
+                fridgeToChange = fridgeProduct
+            };
+            var vm = await _mediator.Send(query);
+            return Ok(vm);
         }
     }
 }

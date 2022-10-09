@@ -5,6 +5,7 @@ using Domain.DTOs;
 using Filters.ActionFilters;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace FridgeApi.Controllers
@@ -25,9 +26,9 @@ namespace FridgeApi.Controllers
             var vm = await _mediator.Send(query);
             return Ok(vm);
         }
-        [HttpPut]
+        [HttpPut("{id}")]
         [ServiceFilter(typeof(ValidateProductExistsAttribute))]
-        public async Task<ActionResult<ProductsDto>> UpdateProduct([FromBody] ProductsDto updateProduct)
+        public async Task<ActionResult<ProductsDto>> UpdateProduct(Guid id,[FromBody] ProductsDto updateProduct)
         {
             var command = new UpdateProductCommand()
             {

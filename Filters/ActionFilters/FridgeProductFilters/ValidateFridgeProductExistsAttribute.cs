@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Domain;
 
-namespace Filters.ActionFilters
+namespace Filters.ActionFilters.FridgeProductFilters
 {
     public class ValidateFridgeProductExistsAttribute : IAsyncActionFilter
     {

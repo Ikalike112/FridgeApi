@@ -6,17 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Domain.DTOs;
 using Microsoft.EntityFrameworkCore;
 
-namespace Filters.ActionFilters
+namespace Filters.ActionFilters.FridgeFilters
 {
-    public class ValidateProductExistsAttribute : IAsyncActionFilter
+    public class ValidateFridgeExistsAtrribute : IAsyncActionFilter
     {
         private readonly IFridgeDbContext _db;
         private readonly ILoggerManager _loggerManager;
 
-        public ValidateProductExistsAttribute(IFridgeDbContext db,
+        public ValidateFridgeExistsAtrribute(IFridgeDbContext db,
             ILoggerManager loggerManager)
         {
             _db = db;
@@ -26,16 +25,16 @@ namespace Filters.ActionFilters
         public async Task OnActionExecutionAsync(ActionExecutingContext context,
             ActionExecutionDelegate next)
         {
-            var productId = (Guid)context.ActionArguments["id"];
-            var product = await _db.Products.Where(p => p.Id == productId).FirstOrDefaultAsync();
+            var id = (Guid)context.ActionArguments["id"];
+            var fridge = await _db.Fridges.Where(f => f.Id == id).FirstOrDefaultAsync();
 
-            if (product == null)
+            if (fridge == null)
             {
-                _loggerManager.LogInfo($"Product with id: {productId} doesn't exist in the database");
-                context.Result = new NotFoundObjectResult($"Product with id: {productId} doesn't exist in the database");
+                _loggerManager.LogInfo($"Fridge with id: {id} doesn't exist in the database");
+                context.Result = new NotFoundObjectResult($"Fridge with id: {id} doesn't exist in the database");
                 return;
             }
-            context.HttpContext.Items.Add("Product", product);
+            context.HttpContext.Items.Add("Fridge", fridge);
             await next();
         }
     }

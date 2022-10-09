@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 using Domain.DTOs;
 using Microsoft.EntityFrameworkCore;
 
-namespace Filters.ActionFilters
+namespace Filters.ActionFilters.FridgeFilters
 {
-    public class ValidateFridgeModelForCreateAttribute : IAsyncActionFilter
+    public class ValidateFridgeModelForManipulateFridgeAttribute : IAsyncActionFilter
     {
         private readonly IFridgeDbContext _db;
         private readonly ILoggerManager _loggerManager;
 
-        public ValidateFridgeModelForCreateAttribute(IFridgeDbContext db,
+        public ValidateFridgeModelForManipulateFridgeAttribute(IFridgeDbContext db,
             ILoggerManager loggerManager)
         {
             _db = db;
@@ -27,7 +27,7 @@ namespace Filters.ActionFilters
         public async Task OnActionExecutionAsync(ActionExecutingContext context,
             ActionExecutionDelegate next)
         {
-            var fridgeDto = context.ActionArguments["createFridge"] as FridgeForCreateDto;
+            var fridgeDto = context.ActionArguments["fridgeDto"] as FridgeForManipulateDto;
             var fridgeModel = await _db.FridgeModels.Where(f => f.Id == fridgeDto.FridgeModelId).FirstOrDefaultAsync();
 
             if (fridgeModel == null)
@@ -41,3 +41,4 @@ namespace Filters.ActionFilters
         }
     }
 }
+ 

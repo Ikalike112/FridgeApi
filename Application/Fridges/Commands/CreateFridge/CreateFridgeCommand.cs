@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Fridges.Commands.Create
+namespace Application.Fridges.Commands.CreateFridge
 {
     public class CreateFridgeCommand : IRequest<Guid>
     {

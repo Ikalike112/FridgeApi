@@ -1,5 +1,7 @@
 ﻿using Application.Interfaces;
 using Filters.ActionFilters;
+using Filters.ActionFilters.FridgeFilters;
+using Filters.ActionFilters.FridgeProductFilters;
 using FridgeApi.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -36,10 +38,11 @@ provider.GetService<FridgeDbContext>());
         }
         public static void ConfigureActionFilters(this IServiceCollection services)
         {
-            services.AddScoped<ValidateFridgeProductForCreateAttribute>();
+            services.AddScoped<ValidateFridgeProductForManipulateAttribute>();
             services.AddScoped<ValidateFridgeProductExistsAttribute>();
             services.AddScoped<ValidateProductExistsAttribute>();
-            services.AddScoped<ValidateFridgeModelForCreateAttribute>();
+            services.AddScoped<ValidateFridgeModelForManipulateFridgeAttribute>();
+            services.AddScoped<ValidateFridgeExistsAtrribute>();
 
         }
     }

@@ -16,11 +16,9 @@ namespace Application.FridgeProduct.Commands.DeleteFridgeProduct
     public class DeleteFridgeProductCommandHandler : IRequestHandler<DeleteFridgeProductCommand>
     {
         private readonly IFridgeDbContext _db;
-        private readonly ILoggerManager _logger;
-        public DeleteFridgeProductCommandHandler(IFridgeDbContext db, ILoggerManager logger)
+        public DeleteFridgeProductCommandHandler(IFridgeDbContext db)
         {
             _db = db;
-            _logger = logger;
         }
         public async Task<Unit> Handle(DeleteFridgeProductCommand request, CancellationToken cancellationToken)
         {

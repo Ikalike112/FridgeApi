@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using AutoMapper;
 using Domain;
 using MediatR;
 using System;
@@ -8,24 +9,27 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Fridges.Commands.Create
+namespace Application.Fridges.Commands.CreateFridge
 {
     public class CreateFridgeCommandHandler : IRequestHandler<CreateFridgeCommand, Guid>
     {
         private readonly IFridgeDbContext _db;
-        public CreateFridgeCommandHandler(IFridgeDbContext db)
+        private readonly IMapper _mapper;
+        public CreateFridgeCommandHandler(IFridgeDbContext db, IMapper mapper)
         {
             _db = db;
+            _mapper = mapper;
         }
         public async Task<Guid> Handle(CreateFridgeCommand request, CancellationToken cancellationToken)
         {
-            Fridge FridgeCreate = new Fridge()
-            {
-                Id = Guid.NewGuid(),
-                FridgeModelId = request.FridgeForCreateDto.FridgeModelId,
-                Name = request.FridgeForCreateDto.Name,
-                OwnerName = request.FridgeForCreateDto.OwnerName ?? ""
-            };
+            var FridgeCreate = _mapper.Map<Fridge>(request.FridgeForCreateDto);
+            //Fridge FridgeCreate = new Fridge()
+            //{
+            //    Id = Guid.NewGuid(),
+            //    FridgeModelId = request.FridgeForCreateDto.FridgeModelId,
+            //    Name = request.FridgeForCreateDto.Name,
+            //    OwnerName = request.FridgeForCreateDto.OwnerName ?? ""
+            //};
             await _db.Fridges.AddAsync(FridgeCreate, cancellationToken);
             await _db.SaveChangesAsync(cancellationToken);
             return FridgeCreate.Id;

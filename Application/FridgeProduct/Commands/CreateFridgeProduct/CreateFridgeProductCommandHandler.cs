@@ -20,21 +20,21 @@ namespace Application.FridgeProduct.Commands.CreateFridgeProduct
         }
         public async Task<Guid> Handle(CreateFridgeProductCommand request, CancellationToken cancellationToken)
         {
-            var fridgeproduct = _db.FridgeProducts.Where(f => f.FridgeId==request.FridgeId && f.ProductId==request.ProductId).FirstOrDefault();
+            var fridgeproduct = _db.FridgeProducts.Where(f => f.FridgeId==request.fridgeProduct.FridgeId && f.ProductId==request.fridgeProduct.ProductId).FirstOrDefault();
             if (fridgeproduct == null)
             {
                 fridgeproduct = new FridgeProducts()
                 {
                     Id = Guid.NewGuid(),
-                    FridgeId = request.FridgeId,
-                    ProductId = request.ProductId,
-                    Quantity = request.Quantity
+                    FridgeId = request.fridgeProduct.FridgeId,
+                    ProductId = request.fridgeProduct.ProductId,
+                    Quantity = request.fridgeProduct.Quantity
                 };
                 await _db.FridgeProducts.AddAsync(fridgeproduct, cancellationToken);
             }
             else
             {
-                fridgeproduct.Quantity += request.Quantity;
+                fridgeproduct.Quantity += request.fridgeProduct.Quantity;
             }
             await _db.SaveChangesAsync(cancellationToken);
             return fridgeproduct.Id;
