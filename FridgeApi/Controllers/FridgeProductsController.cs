@@ -75,7 +75,7 @@ namespace FridgeApi.Controllers
         [ServiceFilter(typeof(ValidateFridgeProductForManipulateAttribute))]
         public async Task<ActionResult<Guid>> Create([FromBody] FridgeProductForManipulateDto fridgeProductDto)
         {
-            var command = new CreateFridgeProductCommand() { fridgeProduct = fridgeProductDto};
+            var command = new CreateFridgeProductCommand(fridgeProductDto);
             var fridgeproductId = await _mediator.Send(command);
             return Ok(fridgeproductId);
         }
@@ -87,8 +87,8 @@ namespace FridgeApi.Controllers
             var fridgeProduct = HttpContext.Items["FridgeProduct"] as FridgeProducts;
             var query = new UpdateFridgeProductCommand()
             {
-                fridgeDto = fridgeProductDto,
-                fridgeToChange = fridgeProduct
+                fridgeProductDto = fridgeProductDto,
+                fridgeProductToChange = fridgeProduct
             };
             var vm = await _mediator.Send(query);
             return Ok(vm);

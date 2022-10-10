@@ -1,7 +1,7 @@
 ﻿using Application.Interfaces;
-using Filters.ActionFilters;
 using Filters.ActionFilters.FridgeFilters;
 using Filters.ActionFilters.FridgeProductFilters;
+using Filters.ActionFilters.ProductFilters;
 using FridgeApi.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

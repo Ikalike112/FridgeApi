@@ -11,15 +11,7 @@ namespace Application.Products.Commands.UpdateProduct
 {
     public class UpdateProductCommand : IRequest
     {
-        public ProductsDto ProductsDto { get; init; }
+        public ProductForManipulateDto ProductsDto { get; init; }
         public Product ProductToChange { get; init; }
-        public UpdateProductCommand(ProductsDto productsDto)
-        {
-            ProductsDto = productsDto;
-        }
-        public UpdateProductCommand()
-        {
-
-        }
     }
 }

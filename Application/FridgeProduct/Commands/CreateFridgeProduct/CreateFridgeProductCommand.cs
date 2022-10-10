@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 
 namespace Application.FridgeProduct.Commands.CreateFridgeProduct
 {
-    public class CreateFridgeProductCommand : IRequest<Guid>
+    public record CreateFridgeProductCommand(FridgeProductForManipulateDto fridgeProduct) : IRequest<Guid>
     {
-        public FridgeProductForManipulateDto fridgeProduct { get; init; }
     }
 }

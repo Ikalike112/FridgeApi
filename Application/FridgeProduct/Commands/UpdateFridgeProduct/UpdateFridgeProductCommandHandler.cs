@@ -18,9 +18,9 @@ namespace Application.FridgeProduct.Commands.UpdateFridgeProduct
         }
         public async Task<Unit> Handle(UpdateFridgeProductCommand request, CancellationToken cancellationToken)
         {
-            request.fridgeToChange.FridgeId = request.fridgeDto.FridgeId;
-            request.fridgeToChange.ProductId = request.fridgeDto.ProductId;
-            request.fridgeToChange.Quantity = request.fridgeDto.Quantity;
+            request.fridgeProductToChange.FridgeId = request.fridgeProductDto.FridgeId;
+            request.fridgeProductToChange.ProductId = request.fridgeProductDto.ProductId;
+            request.fridgeProductToChange.Quantity = request.fridgeProductDto.Quantity;
             await _db.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }

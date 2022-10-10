@@ -11,7 +11,7 @@ namespace Application.FridgeProduct.Commands.UpdateFridgeProduct
 {
     public class UpdateFridgeProductCommand : IRequest
     {
-        public FridgeProductForManipulateDto fridgeDto { get; init; }
-        public FridgeProducts fridgeToChange { get; init; }
+        public FridgeProductForManipulateDto fridgeProductDto { get; init; }
+        public FridgeProducts fridgeProductToChange { get; init; }
     }
 }

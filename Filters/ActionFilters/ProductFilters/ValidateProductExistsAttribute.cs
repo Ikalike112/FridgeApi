@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Domain.DTOs;
 using Microsoft.EntityFrameworkCore;
 
-namespace Filters.ActionFilters
+namespace Filters.ActionFilters.ProductFilters
 {
     public class ValidateProductExistsAttribute : IAsyncActionFilter
     {

@@ -23,13 +23,6 @@ namespace Application.Fridges.Commands.CreateFridge
         public async Task<Guid> Handle(CreateFridgeCommand request, CancellationToken cancellationToken)
         {
             var FridgeCreate = _mapper.Map<Fridge>(request.FridgeForCreateDto);
-            //Fridge FridgeCreate = new Fridge()
-            //{
-            //    Id = Guid.NewGuid(),
-            //    FridgeModelId = request.FridgeForCreateDto.FridgeModelId,
-            //    Name = request.FridgeForCreateDto.Name,
-            //    OwnerName = request.FridgeForCreateDto.OwnerName ?? ""
-            //};
             await _db.Fridges.AddAsync(FridgeCreate, cancellationToken);
             await _db.SaveChangesAsync(cancellationToken);
             return FridgeCreate.Id;

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Application.Fridges.Commands.UpdateFridge
 {
-    internal class UpdateFridgeCommandHandler : IRequestHandler<UpdateFridgeCommand>
+    public class UpdateFridgeCommandHandler : IRequestHandler<UpdateFridgeCommand>
     {
         private readonly IFridgeDbContext _db;
         public UpdateFridgeCommandHandler(IFridgeDbContext db)
@@ -22,6 +22,7 @@ namespace Application.Fridges.Commands.UpdateFridge
         {
             request.FridgeToChange.Name = request.FridgeDto.Name;
             request.FridgeToChange.OwnerName = request.FridgeDto.OwnerName;
+            request.FridgeToChange.FridgeModelId = request.FridgeDto.FridgeModelId;
             await _db.SaveChangesAsync(cancellationToken);
             return Unit.Value;
         }
