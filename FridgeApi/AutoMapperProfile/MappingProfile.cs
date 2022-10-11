@@ -8,6 +8,7 @@ namespace FridgeApi.AutoMapperProfile
     {
         public MappingProfile()
         {
+            CreateMap<ApplicationUser,ApplicationUserDto>();
             CreateMap<Fridge, FridgeDto>();
             CreateMap<Product, ProductsDto>();
             CreateMap<FridgeProducts, FridgeProductsByFridgeIdDto>();
