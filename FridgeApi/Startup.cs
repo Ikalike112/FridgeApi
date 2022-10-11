@@ -44,6 +44,8 @@ namespace FridgeApi
 
             services.ConfigureActionFilters();
 
+            services.ConfigureImageService(Configuration);
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -73,6 +75,14 @@ namespace FridgeApi
             app.UseRouting();
 
             //app.UseAuthorization();
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                OnPrepareResponse = ctx =>
+                {
+                    ctx.Context.Response.Headers.Add("Cache-Control", "public, max-age=3600");
+                }
+            });
 
             app.UseEndpoints(endpoints =>
             {

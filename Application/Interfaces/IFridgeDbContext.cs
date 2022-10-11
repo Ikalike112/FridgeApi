@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,6 @@ namespace Application.Interfaces
         public DbSet<FridgeProducts> FridgeProducts { get; set; }
         public DbSet<Product> Products { get; set; }
         public Task<int> SaveChangesAsync(CancellationToken token);
-
+        public void ChangeZeroQuantity();
     }
 }

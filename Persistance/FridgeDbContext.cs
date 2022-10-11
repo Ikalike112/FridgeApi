@@ -1,5 +1,7 @@
 ﻿using Application.Interfaces;
 using Domain;
+using Domain.DTOs;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -23,5 +25,10 @@ namespace Persistence
         {
             base.OnModelCreating(builder);
         }
+        public void ChangeZeroQuantity()
+        {
+            Database.ExecuteSqlRaw("EXEC dbo.sp_ChangeZeroQuantity");
+           // FridgeProducts.FromSqlRaw("EXEC dbo.sp_ChangeZeroQuantity");
+        }  
     }
 }

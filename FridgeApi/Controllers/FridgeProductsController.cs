@@ -3,6 +3,7 @@ using Application.FridgeProduct.Commands.DeleteFridgeProduct;
 using Application.FridgeProduct.Commands.UpdateFridgeProduct;
 using Application.FridgeProduct.Queries.GetFridgeProducts;
 using Application.FridgeProduct.Queries.GetFridgeProductsById;
+using Application.FridgeProduct.StoredProcedures.SPChangeZeroQuantity;
 using Domain;
 using Domain.DTOs;
 using Filters.ActionFilters.FridgeProductFilters;
@@ -10,6 +11,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Net;
 using System.Threading.Tasks;
@@ -25,6 +27,14 @@ namespace FridgeApi.Controllers
         {
         _mediator = mediator;
         }
+        [Route("ChangeZeroQuantity")]
+        [HttpGet]
+        public async Task<ActionResult> CallSP()
+        {
+            var query = new SPChangeZeroQuantityRequest();
+            var vm = _mediator.Send(query);
+            return Ok(vm);
+        }
         [HttpGet("{id}")]
         public async Task<ActionResult> GetByFridgeId(Guid id)
         {
@@ -39,6 +49,13 @@ namespace FridgeApi.Controllers
             var vm = await _mediator.Send(query);
             return Ok(vm);
         }
+        //[HttpGet]
+        //public async Task<ActionResult> CallStoredProcedure()
+        //{
+        //    var query = new GetFridgeProductsFromSPQuery();
+        //    var fridgeProductsForUpdate = await _mediator.Send(query);
+        //    return Ok();
+        //}
         /// <summary>
         /// Delete FridgeProduct from Database
         /// </summary>
@@ -79,6 +96,18 @@ namespace FridgeApi.Controllers
             var fridgeproductId = await _mediator.Send(command);
             return Ok(fridgeproductId);
         }
+        //[HttpPut]
+        //public async Task<ActionResult> Update([FromBody] IEnumerable<FridgeProductForManipulateDto> fridgeProductsDto)
+        //{
+        //    var fridgeProduct = HttpContext.Items["FridgeProduct"] as FridgeProducts;
+        //    var query = new UpdateFridgeProductCommand()
+        //    {
+        //      //  fridgeProductDto = fridgeProductDto,
+        //        fridgeProductToChange = fridgeProduct
+        //    };
+        //    var vm = await _mediator.Send(query);
+        //    return Ok(vm);
+        //}
         [HttpPut("{id}")]
         [ServiceFilter(typeof(ValidateFridgeProductForManipulateAttribute))]
         [ServiceFilter(typeof(ValidateFridgeProductExistsAttribute))]

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace Domain.DTOs
         [Required]
         [Range(0, int.MaxValue, ErrorMessage = "Quantity can't be lower than 0")]
         public int DefaultQuantity { get; set; }
+        public IFormFile Image { get; set; }
     }
 }

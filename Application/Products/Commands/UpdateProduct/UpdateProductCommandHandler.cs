@@ -15,13 +15,19 @@ namespace Application.Products.Commands.UpdateProduct
     {
         private readonly IFridgeDbContext _db;
         private readonly IMapper _mapper;
-        public UpdateProductCommandHandler(IFridgeDbContext db, IMapper mapper)
+        private readonly IImageService _imageService;
+        public UpdateProductCommandHandler(IFridgeDbContext db, IMapper mapper, IImageService imageService)
         {
             _db = db;
             _mapper = mapper;
+            _imageService = imageService;
         }
         public async Task<Unit> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
+            if (request.ProductsDto.Image != null)
+            {
+                request.ProductToChange.ImageSource = await _imageService.SaveImage(request.ProductsDto.Image);
+            }
             request.ProductToChange.Name = request.ProductsDto.Name;
             request.ProductToChange.DefaultQuantity = request.ProductsDto.DefaultQuantity;
             await _db.SaveChangesAsync(cancellationToken);

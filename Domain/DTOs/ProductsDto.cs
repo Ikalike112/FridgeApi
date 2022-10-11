@@ -15,5 +15,6 @@ namespace Domain.DTOs
         [Required]
         [Range(0, int.MaxValue, ErrorMessage = "Quantity can't be lower than 0")]
         public int DefaultQuantity { get; set; }
+        public string ImageSource { get; set; }
     }
 }

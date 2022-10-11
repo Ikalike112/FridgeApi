@@ -1,4 +1,6 @@
 ﻿using Application.Fridges.Commands.CreateFridge;
+using Application.Fridges.Commands.DeleteFridge;
+using Application.Fridges.Commands.UpdateFridge;
 using Application.Fridges.Queries.GetFridges;
 using Application.Interfaces;
 using AutoMapper;
@@ -23,6 +25,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using UnitTests.MoqObjects;
 using Xunit;
 
@@ -30,9 +33,6 @@ namespace UnitTests.Tests
 {
     public class FridgeControllerTests : IDisposable
     {
-        /* 
-         private readonly Mock<IFridgeDbContext> _db;
-        */
         private readonly ValidateFridgeModelForManipulateFridgeAttribute _validateFridgeModelForManipulateFridgeAttribute;
         private readonly Mock<ActionExecutionDelegate> _actionExecutionDelegate;
         private readonly ValidateFridgeExistsAtrribute _validateFridgeExistsAtrribute;
@@ -74,17 +74,6 @@ namespace UnitTests.Tests
                 _db, loggerManagerMock.Object);
             _validateFridgeModelForManipulateFridgeAttribute = new ValidateFridgeModelForManipulateFridgeAttribute(
                 _db, loggerManagerMock.Object);
-            /*var loggerManagerMock = new Mock<ILoggerManager>();
-
-
-            _controller = new FridgeController(Mediatr.Object);
-
-
-            
-
-
-
-            */
         }
         public void Dispose()
         {
@@ -225,11 +214,80 @@ namespace UnitTests.Tests
             };
             var fridgeId = await handler.Handle(
                 new CreateFridgeCommand(FridgeForCreateDto), CancellationToken.None);
-            //Result
+            //Assert
             Assert.NotNull(
                 await _db.Fridges.SingleOrDefaultAsync(_fridge =>
                 _fridge.Id == fridgeId && _fridge.Name == fridgeName &&
                 _fridge.OwnerName == ownerName && _fridge.FridgeModelId == fridgeModelId));
         }
+        [Fact]
+        public async Task DeleteFridge_ExistingGuid_RemovesOneItem()
+        {
+            //Arrange
+            var existingGuid = Guid.Parse("7870E84D-0F97-4196-BED7-19BD8FF40A63");
+            var countBeforeDelete = await _db.Fridges.CountAsync();
+            var handler = new DeleteFridgeCommandHandler(_db);
+
+            var actionExecutingContext = new ActionExecutingContext(
+                _actionContext,
+                new List<IFilterMetadata>(),
+                new Dictionary<string, object>
+                {
+                    {"id", existingGuid }
+                },
+                _controller
+            );
+            //Act
+            await _validateFridgeExistsAtrribute.OnActionExecutionAsync(actionExecutingContext,
+                _actionExecutionDelegate.Object);
+            var result = await handler.Handle(
+                new DeleteFridgeCommand(
+                    _controller.HttpContext.Items["Fridge"] as Fridge), CancellationToken.None);
+            //Assert
+            Assert.Equal(countBeforeDelete-1, _db.Fridges.Count());
+        }
+        [Fact]
+        public async Task UpdateFridge_ValidObject_Success()
+        {
+            //Arrange
+            var existingFridgeGuid = Guid.Parse("7870E84D-0F97-4196-BED7-19BD8FF40A63");
+            var existingOtherFridgeModelGuid = Guid.Parse("B0463F44-AF0C-434F-9667-C3BF6C9F8A93");
+            var fridgeDto = new FridgeForManipulateDto()
+            {
+                FridgeModelId = existingOtherFridgeModelGuid,
+                Name = "Electrolux Dima Updated",
+                OwnerName = "Dima Updated"
+            };
+            var countBeforeDelete = await _db.Fridges.CountAsync();
+            var handler = new UpdateFridgeCommandHandler(_db);
+
+            var actionExecutingContext = new ActionExecutingContext(
+                _actionContext,
+                new List<IFilterMetadata>(),
+                new Dictionary<string, object>
+                {
+                    {"id", existingFridgeGuid },
+                    {"fridgeDto", fridgeDto},
+                },
+                _controller
+            );
+            //Act
+            await _validateFridgeExistsAtrribute.OnActionExecutionAsync(actionExecutingContext,
+                _actionExecutionDelegate.Object);
+            await _validateFridgeModelForManipulateFridgeAttribute.OnActionExecutionAsync(actionExecutingContext,
+    _actionExecutionDelegate.Object);
+            var existingInDatabaseFridge = _controller.HttpContext.Items["Fridge"] as Fridge;
+            var query = new UpdateFridgeCommand()
+            {
+                FridgeDto = fridgeDto,
+                FridgeToChange = existingInDatabaseFridge
+            };
+            await handler.Handle(query, CancellationToken.None);
+            //Assert
+            Assert.NotNull(
+                           await _db.Fridges.SingleOrDefaultAsync(_fridge =>
+                           _fridge.Id == existingFridgeGuid && _fridge.Name == fridgeDto.Name &&
+                           _fridge.OwnerName == fridgeDto.OwnerName && _fridge.FridgeModelId == fridgeDto.FridgeModelId));
+        }        
     }
 }

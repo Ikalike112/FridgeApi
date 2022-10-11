@@ -31,7 +31,7 @@ namespace FridgeApi.Controllers
         }
         [HttpPut("{id}")]
         [ServiceFilter(typeof(ValidateProductExistsAttribute))]
-        public async Task<ActionResult> UpdateProduct(Guid id,[FromBody] ProductForManipulateDto updateProduct)
+        public async Task<ActionResult> UpdateProduct(Guid id, [FromForm] ProductForManipulateDto updateProduct)
         {
             var command = new UpdateProductCommand()
             {
@@ -42,7 +42,7 @@ namespace FridgeApi.Controllers
             return NoContent();
         }
         [HttpPost]
-        public async Task<ActionResult<Guid>> CreateProduct([FromBody] ProductForManipulateDto productDto)
+        public async Task<ActionResult<Guid>> CreateProduct([FromForm] ProductForManipulateDto productDto)
         {
             var command = new CreateProductCommand(productDto);
             var pruductId = await _mediator.Send(command);
