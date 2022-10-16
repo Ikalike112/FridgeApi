@@ -4,6 +4,7 @@ using Application.FridgeProduct.Commands.UpdateFridgeProduct;
 using Application.FridgeProduct.Queries.GetFridgeProducts;
 using Application.FridgeProduct.Queries.GetFridgeProductsById;
 using Application.FridgeProduct.StoredProcedures.SPChangeZeroQuantity;
+using AutoMapper;
 using Domain;
 using Domain.DTOs;
 using Filters.ActionFilters.FridgeProductFilters;
@@ -23,9 +24,11 @@ namespace FridgeApi.Controllers
     public class FridgeProductsController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public FridgeProductsController(IMediator mediator)
+        private readonly IMapper _mapper;
+        public FridgeProductsController(IMediator mediator, IMapper mapper)
         {
-        _mediator = mediator;
+            _mediator = mediator;
+            _mapper = mapper;
         }
         [Route("ChangeZeroQuantity")]
         [HttpGet]
@@ -41,6 +44,14 @@ namespace FridgeApi.Controllers
             var query = new GetFridgeProductsByIdQuery(id);
             var vm = await _mediator.Send(query);
             return Ok(vm);
+        }
+        [Route("GetByFridgeProductId/{id}")]
+        [HttpGet]
+        [ServiceFilter(typeof(ValidateFridgeProductExistsAttribute))]
+        public async Task<ActionResult> GetByFridgeProductId(Guid id)
+        {
+            var fridgeProduct = HttpContext.Items["FridgeProduct"] as FridgeProducts;        
+            return Ok(_mapper.Map<FridgeProductsDto>(fridgeProduct));
         }
         [HttpGet]
         public async Task<ActionResult> GetAll()

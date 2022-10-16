@@ -49,7 +49,7 @@ namespace UnitTests.Tests
             _db = FridgeDbContextFactory.Create();
 
             var httpContext = new DefaultHttpContext();
-            _controller = new FridgeController(Mediatr.Object)
+            _controller = new FridgeController(Mediatr.Object, mapper, loggerManagerMock.Object)
             {
                 ControllerContext = new ControllerContext
                 {

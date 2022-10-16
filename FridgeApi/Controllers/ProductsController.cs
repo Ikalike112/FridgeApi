@@ -7,8 +7,10 @@ using Domain;
 using Domain.DTOs;
 using Filters.ActionFilters.ProductFilters;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Data;
 using System.Threading.Tasks;
 
 namespace FridgeApi.Controllers
@@ -30,6 +32,7 @@ namespace FridgeApi.Controllers
             return Ok(vm);
         }
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         [ServiceFilter(typeof(ValidateProductExistsAttribute))]
         public async Task<ActionResult> UpdateProduct(Guid id, [FromForm] ProductForManipulateDto updateProduct)
         {
@@ -42,6 +45,7 @@ namespace FridgeApi.Controllers
             return NoContent();
         }
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<Guid>> CreateProduct([FromForm] ProductForManipulateDto productDto)
         {
             var command = new CreateProductCommand(productDto);
@@ -49,6 +53,7 @@ namespace FridgeApi.Controllers
             return Ok(pruductId);
         }
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         [ServiceFilter(typeof(ValidateProductExistsAttribute))]
         public async Task<ActionResult<ProductsDto>> DeleteProduct(Guid id)
         {

@@ -13,6 +13,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace FridgeApi.Controllers
@@ -22,9 +23,13 @@ namespace FridgeApi.Controllers
     public class FridgeController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public FridgeController(IMediator mediator)
+        private readonly IMapper _mapper;
+        private readonly ILoggerManager _loggerManager;
+        public FridgeController(IMediator mediator, IMapper mapper, ILoggerManager loggerManager)
         {
             _mediator = mediator;
+            _mapper = mapper;
+            _loggerManager = loggerManager;
         }
 
         [HttpGet]
@@ -33,6 +38,19 @@ namespace FridgeApi.Controllers
             var query = new GetFridgesQuery();
             var vm = await _mediator.Send(query);
             return Ok(vm);
+        }
+        [HttpGet("{id}")]
+        [ServiceFilter(typeof(ValidateFridgeExistsAtrribute))]
+        public async Task<ActionResult<FridgeDto>> GetFridgeById(Guid id)
+        {
+            var fridge = HttpContext.Items["Fridge"] as Fridge;
+            if (fridge == null)
+            {
+                _loggerManager.LogInfo($"Fridge with id: {id} doesn't exist in the database");
+                return new NotFoundObjectResult($"Fridge with id: {id} doesn't exist in the database");
+            }
+            var fridgeDto = _mapper.Map<FridgeByIdDto>(fridge);
+            return Ok(fridgeDto);
         }
         [HttpPost]
         [ServiceFilter(typeof(ValidateFridgeModelForManipulateFridgeAttribute))]

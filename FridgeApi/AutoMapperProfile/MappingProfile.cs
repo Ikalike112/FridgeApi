@@ -9,7 +9,11 @@ namespace FridgeApi.AutoMapperProfile
         public MappingProfile()
         {
             CreateMap<ApplicationUser,ApplicationUserDto>();
-            CreateMap<Fridge, FridgeDto>();
+            CreateMap<ApplicationUser,ApplicationUserWithoutJWTDto>();
+            CreateMap<Fridge, FridgeDto>()
+                .ForMember(dest => dest.FridgeModelName, opt => opt.MapFrom(src => src.FridgeModel.Name));
+            CreateMap<Fridge, FridgeByIdDto>()
+                .ForMember(dest => dest.FridgeModelId, opt => opt.MapFrom(src => src.FridgeModel.Id));
             CreateMap<Product, ProductsDto>();
             CreateMap<FridgeProducts, FridgeProductsByFridgeIdDto>();
             CreateMap<FridgeProducts, FridgeProductsDto>();

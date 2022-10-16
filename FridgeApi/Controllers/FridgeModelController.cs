@@ -16,6 +16,8 @@ using Application.FridgeModels.Commands.UpdateFridgeModel;
 using Application.FridgeModels.Commands.CreateFridgeModel;
 using Application.Fridges.Commands.DeleteFridge;
 using Application.FridgeModels.Commands.DeleteFridgeModel;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace FridgeApi.Controllers
 {
@@ -36,6 +38,7 @@ namespace FridgeApi.Controllers
             return Ok(vm);
         }
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         [ServiceFilter(typeof(ValidateFridgeModelExistsAttribute))]
         public async Task<ActionResult> UpdateFridgeModel(Guid id, [FromBody] FridgeModelForManipulateDto fridgeModelDto)
         {
@@ -48,6 +51,7 @@ namespace FridgeApi.Controllers
             return NoContent();
         }
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<Guid>> CreateFridgeModel([FromBody] FridgeModelForManipulateDto fridgeModelDto)
         {
             var command = new CreateFridgeModelCommand(fridgeModelDto);
@@ -55,6 +59,7 @@ namespace FridgeApi.Controllers
             return Ok(fridgeModelId);
         }
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         [ServiceFilter(typeof(ValidateFridgeModelExistsAttribute))]
         public async Task<ActionResult<ProductsDto>> DeleteFridgeModel(Guid id)
         {

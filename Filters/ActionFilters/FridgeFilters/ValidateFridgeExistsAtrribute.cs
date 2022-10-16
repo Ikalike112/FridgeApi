@@ -26,7 +26,7 @@ namespace Filters.ActionFilters.FridgeFilters
             ActionExecutionDelegate next)
         {
             var id = (Guid)context.ActionArguments["id"];
-            var fridge = await _db.Fridges.Where(f => f.Id == id).FirstOrDefaultAsync();
+            var fridge = await _db.Fridges.Include(f => f.FridgeModel).Where(f => f.Id == id).FirstOrDefaultAsync();
 
             if (fridge == null)
             {

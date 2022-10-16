@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,7 +27,12 @@ namespace FridgeApi.Services
             _userManager = userManager;
             _mapper = mapper;
         }
-
+        public async Task<ApplicationUserWithoutJWTDto> GetUser(string Email)
+        {
+            var user = _userManager.FindByEmailAsync(Email);
+            var userDto = _mapper.Map<ApplicationUserWithoutJWTDto>(await user);
+            return userDto;
+        }
         public async Task<ActionResult<ApplicationUserDto>> Login(LoginModelDto loginDto)
         {
             var user = await _userManager.FindByEmailAsync(loginDto.Email);

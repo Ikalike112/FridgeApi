@@ -23,7 +23,7 @@ namespace Application.Fridges.Queries.GetFridges
         }
         public async Task<IEnumerable<FridgeDto>> Handle(GetFridgesQuery request, CancellationToken cancellationToken)
         {
-            var fridges = await _db.Fridges.AsNoTracking().ToListAsync();
+            var fridges = await _db.Fridges.Include(x => x.FridgeModel).AsNoTracking().ToListAsync();
 
             var fridgesDto = _mapper.Map<IEnumerable<FridgeDto>>(fridges);
 
