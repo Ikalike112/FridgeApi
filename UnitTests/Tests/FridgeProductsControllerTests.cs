@@ -47,23 +47,25 @@ namespace UnitTests.Tests
         private readonly FridgeDbContext _db;
         public FridgeProductsControllerTests()
         {
+            var myProfile = new MappingProfile();
+            var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
+            mapper = new Mapper(configuration);
+
+
             var loggerManagerMock = new Mock<ILoggerManager>();
             Mediatr = new Mock<IMediator>();
 
             _db = FridgeDbContextFactory.Create();
 
             var httpContext = new DefaultHttpContext();
-            _controller = new FridgeProductsController(Mediatr.Object)
+            _controller = new FridgeProductsController(Mediatr.Object, mapper)
             {
                 ControllerContext = new ControllerContext
                 {
                     HttpContext = httpContext
                 }
             };
-
-            var myProfile = new MappingProfile();
-            var configuration = new MapperConfiguration(cfg => cfg.AddProfile(myProfile));
-            mapper = new Mapper(configuration);
+    
 
             _actionContext = new ActionContext(
                 _controller.HttpContext,

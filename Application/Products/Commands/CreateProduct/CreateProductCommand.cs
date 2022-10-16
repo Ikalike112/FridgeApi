@@ -8,12 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Products.Commands.CreateProduct
 {
-    public class CreateProductCommand : IRequest<Guid>
+    public record CreateProductCommand(ProductForManipulateDto ProductForManipulateDto) : IRequest<Guid>
     {
-        public ProductForManipulateDto ProductForManipulateDto { get; init; }
-        public CreateProductCommand(ProductForManipulateDto productForManipulateDto)
-        {
-            ProductForManipulateDto = productForManipulateDto;
-        }
     }
 }

@@ -84,7 +84,7 @@ namespace UnitTests.MoqObjects
                 new Product
                 {
                     Id = Guid.Parse("413CE5BA-F360-4C4C-8F7E-CD26667FE5FF"),
-                    Name = "Crud",
+                    Name = "Curd",
                     DefaultQuantity = 1
                 },
                 new Product

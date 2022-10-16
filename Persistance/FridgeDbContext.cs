@@ -23,12 +23,17 @@ namespace Persistence
         public DbSet<ApplicationUser> Users { get; set; }
         public FridgeDbContext(DbContextOptions<FridgeDbContext> options) : base(options)
         {
+            Database.Migrate();
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             builder.ApplyConfiguration(new RoleConfiguration());
+            builder.ApplyConfiguration(new ProductsConfiguration());
+            builder.ApplyConfiguration(new FridgeModelConfiguration());
+            builder.ApplyConfiguration(new FridgesConfiguration());
+            builder.ApplyConfiguration(new FridgeProductsConfiguration());
         }
         public void ChangeZeroQuantity()
         {

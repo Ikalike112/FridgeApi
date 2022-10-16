@@ -8,12 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.Fridges.Commands.CreateFridge
 {
-    public class CreateFridgeCommand : IRequest<Guid>
+    public record CreateFridgeCommand(FridgeForCreateDto FridgeForCreateDto) : IRequest<Guid>
     {
-        public FridgeForCreateDto FridgeForCreateDto { get; set; }
-        public CreateFridgeCommand(FridgeForCreateDto fridgeForCreateDto)
-        {
-            FridgeForCreateDto = fridgeForCreateDto;
-        }
     }
 }
