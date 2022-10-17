@@ -21,7 +21,7 @@ namespace Application.Products.Commands.DeleteProduct
         }
         public async Task<Unit> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
-            if (request.product.ImageSource != "")
+            if (!String.IsNullOrEmpty(request.product.ImageSource))
             {
                 await _imageService.DeleteImage(request.product.ImageSource);
             }
