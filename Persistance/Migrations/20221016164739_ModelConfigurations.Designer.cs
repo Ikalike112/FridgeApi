@@ -148,8 +148,8 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = new Guid("78f6f534-8b95-44b7-88e3-6c395c53207e"),
-                            FridgeModelId = new Guid("5d25ffb3-2f6b-4911-974d-a35f34ca7014"),
-                            Name = "Indesid Roma",
+                            FridgeModelId = new Guid("2767f531-6eab-492b-99fa-839b826552e9"),
+                            Name = "Indesit Roma",
                             OwnerName = "Roman"
                         });
                 });

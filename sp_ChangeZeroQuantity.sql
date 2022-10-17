@@ -1,4 +1,4 @@
-CREATE PROC sp_ChangeZeroQuantity
+CREATE OR ALTER PROC sp_ChangeZeroQuantity
 AS
 DECLARE @BASE_URL NVARCHAR(300) = 'https://localhost:5001/api/fridgeproducts/';
 DECLARE @URL NVARCHAR(300)

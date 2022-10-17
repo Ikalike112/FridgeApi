@@ -146,8 +146,8 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = new Guid("78f6f534-8b95-44b7-88e3-6c395c53207e"),
-                            FridgeModelId = new Guid("5d25ffb3-2f6b-4911-974d-a35f34ca7014"),
-                            Name = "Indesid Roma",
+                            FridgeModelId = new Guid("2767f531-6eab-492b-99fa-839b826552e9"),
+                            Name = "Indesit Roma",
                             OwnerName = "Roman"
                         });
                 });
@@ -316,7 +316,7 @@ namespace Persistence.Migrations
                         {
                             Id = new Guid("e73af1a7-0f1a-4762-8d81-4fe406fa353b"),
                             FridgeId = new Guid("78f6f534-8b95-44b7-88e3-6c395c53207e"),
-                            ProductId = new Guid("a3db9cb6-4d70-44fc-b140-969b5594a56e"),
+                            ProductId = new Guid("60aa9097-9f29-4f08-b0bd-b07a68b9da43"),
                             Quantity = 3
                         });
                 });
@@ -417,15 +417,15 @@ namespace Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1b0f3777-e2ce-4da4-abf9-730cd4beeb6c",
-                            ConcurrencyStamp = "adec2842-d831-4043-9cc1-1c0ea90e66ef",
+                            Id = "62e11add-a8cc-440a-8456-4f989cce9ccf",
+                            ConcurrencyStamp = "85ebcfc8-c9a0-42f9-9384-c604daffce6e",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "195896e6-fa3e-4958-b5c8-6b1ce4ab320d",
-                            ConcurrencyStamp = "9dac0541-f95b-4081-a624-0b8901b97acf",
+                            Id = "a88b189d-7267-434a-a4c1-e74ba1d31982",
+                            ConcurrencyStamp = "d4011cd8-408e-4260-944c-5e14ef08796b",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
