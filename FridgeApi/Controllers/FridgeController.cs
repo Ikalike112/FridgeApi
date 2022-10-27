@@ -1,19 +1,14 @@
-﻿
-using Application.FridgeProduct.Commands.DeleteFridgeProduct;
-using Application.Fridges.Commands.CreateFridge;
-using Application.Fridges.Commands.DeleteFridge;
-using Application.Fridges.Commands.UpdateFridge;
-using Application.Fridges.Queries.GetFridges;
-using Application.Interfaces;
+﻿using Application.Commands.Fridges;
+using Application.Contracts.Fridges;
+using Application.Queries.Fridges;
+using Application.Services.Interfaces;
 using AutoMapper;
 using Domain;
-using Domain.DTOs;
 using Filters.ActionFilters.FridgeFilters;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace FridgeApi.Controllers

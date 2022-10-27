@@ -1,14 +1,10 @@
-﻿using Application.FridgeProduct.Commands.CreateFridgeProduct;
-using Application.Interfaces;
-using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Domain.DTOs;
 using Microsoft.EntityFrameworkCore;
+using Application.Services.Interfaces;
+using Application.Contracts.Fridges;
 
 namespace Filters.ActionFilters.FridgeFilters
 {

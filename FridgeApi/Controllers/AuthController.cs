@@ -1,9 +1,6 @@
-﻿using Application.Interfaces;
-using Domain;
-using Domain.DTOs;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Application.Services.Interfaces;
+using Application.Contracts.Auth;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Threading.Tasks;

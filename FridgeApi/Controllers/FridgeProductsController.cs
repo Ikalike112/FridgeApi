@@ -1,20 +1,14 @@
-﻿using Application.FridgeProduct.Commands.CreateFridgeProduct;
-using Application.FridgeProduct.Commands.DeleteFridgeProduct;
-using Application.FridgeProduct.Commands.UpdateFridgeProduct;
-using Application.FridgeProduct.Queries.GetFridgeProducts;
-using Application.FridgeProduct.Queries.GetFridgeProductsById;
-using Application.FridgeProduct.StoredProcedures.SPChangeZeroQuantity;
+﻿using Application.Commands.FridgeProduct;
+using Application.Commands.FridgeProduct.SPChangeZeroQuantity;
+using Application.Contracts.FridgeProducts;
+using Application.Queries.FridgeProduct;
+using Application.Queries.FridgeProduct.GetFridgeProductsByFridgeId;
 using AutoMapper;
 using Domain;
-using Domain.DTOs;
 using Filters.ActionFilters.FridgeProductFilters;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace FridgeApi.Controllers

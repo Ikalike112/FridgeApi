@@ -1,12 +1,5 @@
-﻿using Application.Interfaces;
-using Application.Products.Commands.CreateProduct;
-using Application.Products.Commands.DeleteProduct;
-using Application.Products.Commands.UpdateProduct;
-using Application.Products.Queries.GetAllProducts;
-using AutoMapper;
-using Domain.DTOs;
+﻿using AutoMapper;
 using Domain;
-using Filters.ActionFilters.ProductFilters;
 using FridgeApi.AutoMapperProfile;
 using FridgeApi.Controllers;
 using MediatR;
@@ -20,18 +13,20 @@ using Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using UnitTests.MoqObjects;
 using Xunit;
 using Filters.ActionFilters.FridgeModelFilters;
 using Microsoft.AspNetCore.Routing;
-using Application.FridgeModels.Queries.GetAllFridgeModels;
-using Application.FridgeModels.Commands.CreateFridgeModel;
 using Microsoft.EntityFrameworkCore;
-using Application.FridgeModels.Commands.DeleteFridgeModel;
-using Application.FridgeModels.Commands.UpdateFridgeModel;
+using Application.Services.Interfaces;
+using Application.QueryHandlers.FridgeModels;
+using Application.Queries.FridgeModels;
+using Application.Contracts.FridgeModels;
+using Application.CommandHandlers.FridgeModels;
+using Application.Contracts.Fridges;
+using Application.Commands.FridgeModels;
 
 namespace UnitTests.Tests
 {
@@ -151,7 +146,7 @@ namespace UnitTests.Tests
             var ModelName = "Bosch Serie 8 VitaFresh Plus KGN39LB32R";
             var Year = 2020;
             //Act
-            var fridgeModelDto = new Domain.DTOs.FridgeModelForManipulateDto
+            var fridgeModelDto = new FridgeModelForManipulateDto
             {
                 Name = ModelName,
                 Year = Year

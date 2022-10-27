@@ -1,5 +1,9 @@
 ﻿using AutoMapper;
-using Domain.DTOs;
+using Application.Contracts.Auth;
+using Application.Contracts.Fridges;
+using Application.Contracts.Products;
+using Application.Contracts.FridgeModels;
+using Application.Contracts.FridgeProducts;
 using Domain;
 
 namespace FridgeApi.AutoMapperProfile

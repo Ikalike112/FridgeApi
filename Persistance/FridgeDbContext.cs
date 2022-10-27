@@ -1,16 +1,8 @@
-﻿using Application.Interfaces;
+﻿using Application.Services.Interfaces;
 using Domain;
-using Domain.DTOs;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Persistence
 {

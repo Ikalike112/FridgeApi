@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application.Services.Implementations;
+using Application.Services.Interfaces;
 using Domain;
 using Filters.ActionFilters.FridgeFilters;
 using Filters.ActionFilters.FridgeModelFilters;
@@ -15,7 +16,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Persistence;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Abstractions;
 using System.Reflection;

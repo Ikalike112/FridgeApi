@@ -1,5 +1,4 @@
-﻿using Application.Interfaces;
-using AutoMapper;
+﻿using AutoMapper;
 using FridgeApi.AutoMapperProfile;
 using FridgeApi.Controllers;
 using MediatR;
@@ -13,21 +12,14 @@ using Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using UnitTests.MoqObjects;
 using Filters.ActionFilters.ProductFilters;
 using Microsoft.AspNetCore.Routing;
-using Domain.DTOs;
 using System.Threading;
 using Xunit;
-using Application.Products.Queries.GetAllProducts;
 using Domain;
 using Microsoft.EntityFrameworkCore;
-using Application.Products.Commands.CreateProduct;
-using Application.Products.Commands.DeleteProduct;
-using Application.Products.Commands.UpdateProduct;
-using FridgeApi.Services;
 
 namespace UnitTests.Tests
 {

@@ -1,16 +1,12 @@
-﻿using Application.Fridges.Commands.CreateFridge;
-using Application.Products.Commands.CreateProduct;
-using Application.Products.Commands.DeleteProduct;
-using Application.Products.Commands.UpdateProduct;
-using Application.Products.Queries.GetAllProducts;
+﻿using Application.Commands.Products;
+using Application.Contracts.Products;
+using Application.Queries.Products;
 using Domain;
-using Domain.DTOs;
 using Filters.ActionFilters.ProductFilters;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Data;
 using System.Threading.Tasks;
 
 namespace FridgeApi.Controllers

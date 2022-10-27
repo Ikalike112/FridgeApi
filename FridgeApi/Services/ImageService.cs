@@ -1,4 +1,4 @@
-﻿using Application.Interfaces;
+﻿using Application.Services.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;

@@ -1,11 +1,5 @@
-﻿using Application.Fridges.Commands.CreateFridge;
-using Application.Fridges.Commands.DeleteFridge;
-using Application.Fridges.Commands.UpdateFridge;
-using Application.Fridges.Queries.GetFridges;
-using Application.Interfaces;
-using AutoMapper;
+﻿using AutoMapper;
 using Domain;
-using Domain.DTOs;
 using Filters.ActionFilters.FridgeFilters;
 using FridgeApi.AutoMapperProfile;
 using FridgeApi.Controllers;
@@ -22,10 +16,8 @@ using Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using UnitTests.MoqObjects;
 using Xunit;
 

@@ -1,12 +1,5 @@
-﻿using Application.Fridges.Commands.CreateFridge;
-using Application.Fridges.Commands.DeleteFridge;
-using Application.Fridges.Commands.UpdateFridge;
-using Application.Fridges.Queries.GetFridges;
-using Application.Interfaces;
-using AutoMapper;
-using Domain.DTOs;
+﻿using AutoMapper;
 using Domain;
-using Filters.ActionFilters.FridgeFilters;
 using FridgeApi.AutoMapperProfile;
 using FridgeApi.Controllers;
 using MediatR;
@@ -20,18 +13,19 @@ using Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using UnitTests.MoqObjects;
 using Xunit;
 using Filters.ActionFilters.FridgeProductFilters;
 using Microsoft.AspNetCore.Routing;
-using Application.FridgeProduct.Queries.GetFridgeProducts;
-using Application.FridgeProduct.Commands.CreateFridgeProduct;
 using Microsoft.EntityFrameworkCore;
-using Application.FridgeProduct.Commands.DeleteFridgeProduct;
-using Application.FridgeProduct.Commands.UpdateFridgeProduct;
+using Application.Contracts.FridgeProducts;
+using Application.QueryHandlers.FridgeProduct;
+using Application.Queries.FridgeProduct;
+using Application.Services.Interfaces;
+using Application.CommandHandlers.FridgeProduct;
+using Application.Commands.FridgeProduct;
 
 namespace UnitTests.Tests
 {

@@ -1,23 +1,14 @@
-﻿using Application.Products.Commands.CreateProduct;
-using Application.Products.Commands.DeleteProduct;
-using Application.Products.Commands.UpdateProduct;
-using Application.Products.Queries.GetAllProducts;
-using Domain.DTOs;
-using Domain;
-using Filters.ActionFilters.ProductFilters;
+﻿using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
-using Application.FridgeModels.Queries.GetAllFridgeModels;
-using Filters.ActionFilters.FridgeFilters;
 using Filters.ActionFilters.FridgeModelFilters;
-using Application.FridgeModels.Commands.UpdateFridgeModel;
-using Application.FridgeModels.Commands.CreateFridgeModel;
-using Application.Fridges.Commands.DeleteFridge;
-using Application.FridgeModels.Commands.DeleteFridgeModel;
 using Microsoft.AspNetCore.Authorization;
-using System.Data;
+using Application.Contracts.FridgeModels;
+using Application.Queries.FridgeModels;
+using Application.Commands.FridgeModels;
+using Application.Contracts.Fridges;
 
 namespace FridgeApi.Controllers
 {
@@ -61,7 +52,7 @@ namespace FridgeApi.Controllers
         [HttpDelete("{id}")]
         [Authorize(Roles = "Administrator")]
         [ServiceFilter(typeof(ValidateFridgeModelExistsAttribute))]
-        public async Task<ActionResult<ProductsDto>> DeleteFridgeModel(Guid id)
+        public async Task<ActionResult> DeleteFridgeModel(Guid id)
         {
             var productForDelete = HttpContext.Items["FridgeModel"] as FridgeModel;
             var command = new DeleteFridgeModelCommand(productForDelete);
