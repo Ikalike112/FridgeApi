@@ -1,8 +1,13 @@
+using Application.Behaviors;
+using Application.Services.Interfaces;
+using FluentValidation;
 using FridgeApi.AutoMapperProfile;
 using FridgeApi.Extensions;
+using FridgeApi.Middleware;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,8 +33,10 @@ namespace FridgeApi
             {
                 config.AddProfile(new MappingProfile());
             });
-            services.AddMediatR(typeof(IFridgeDbContext).GetTypeInfo().Assembly);
-
+            services.AddMediatR(typeof(ValidationBehavior<,>).GetTypeInfo().Assembly);
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            services.AddValidatorsFromAssembly(typeof(ValidationBehavior<,>).GetTypeInfo().Assembly);
+            services.AddTransient<ExceptionHandlingMiddleware>();
             services.ConfigureActionFilters();
 
             services.ConfigureImageService(Configuration);
@@ -52,7 +59,8 @@ namespace FridgeApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FridgeApi v1"));
             }
 
-            app.ConfigureExceptionHandler(logger);
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

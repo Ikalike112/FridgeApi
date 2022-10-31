@@ -1,7 +1,8 @@
 ﻿using Application.Commands.Fridges;
 using Application.Services.Interfaces;
+using Application.Services.Interfaces.Messaging;
 using AutoMapper;
-using Domain;
+using Domain.Entities;
 using MediatR;
 using System;
 using System.Threading;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Application.CommandHandlers.Fridges
 {
-    public class CreateFridgeCommandHandler : IRequestHandler<CreateFridgeCommand, Guid>
+    public class CreateFridgeCommandHandler : ICommandHandler<CreateFridgeCommand, Guid>
     {
         private readonly IFridgeDbContext _db;
         private readonly IMapper _mapper;

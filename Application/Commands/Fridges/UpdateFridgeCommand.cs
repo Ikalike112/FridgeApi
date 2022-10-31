@@ -1,5 +1,5 @@
 ﻿using Application.Contracts.Fridges;
-using Domain;
+using Domain.Entities;
 using MediatR;
 
 namespace Application.Commands.Fridges

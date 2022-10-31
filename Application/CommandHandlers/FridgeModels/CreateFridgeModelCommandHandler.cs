@@ -1,7 +1,7 @@
 ﻿using Application.Commands.FridgeModels;
 using Application.Services.Interfaces;
 using AutoMapper;
-using Domain;
+using Domain.Entities;
 using MediatR;
 using System;
 using System.Threading;

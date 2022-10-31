@@ -1,6 +1,6 @@
 ﻿using Application.Commands.FridgeProduct;
 using Application.Services.Interfaces;
-using Domain;
+using Domain.Entities;
 using MediatR;
 using System;
 using System.Linq;
