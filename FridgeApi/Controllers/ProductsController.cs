@@ -1,7 +1,7 @@
 ﻿using Application.Commands.Products;
 using Application.Contracts.Products;
 using Application.Queries.Products;
-using Domain;
+using Domain.Entities;
 using Filters.ActionFilters.ProductFilters;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;

@@ -4,7 +4,7 @@ using Application.Contracts.FridgeProducts;
 using Application.Queries.FridgeProduct;
 using Application.Queries.FridgeProduct.GetFridgeProductsByFridgeId;
 using AutoMapper;
-using Domain;
+using Domain.Entities;
 using Filters.ActionFilters.FridgeProductFilters;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

@@ -1,6 +1,6 @@
 ﻿using Application.Services.Implementations;
 using Application.Services.Interfaces;
-using Domain;
+using Domain.Entities;
 using Filters.ActionFilters.FridgeFilters;
 using Filters.ActionFilters.FridgeModelFilters;
 using Filters.ActionFilters.FridgeProductFilters;

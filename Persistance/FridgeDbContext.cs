@@ -1,5 +1,5 @@
 ﻿using Application.Services.Interfaces;
-using Domain;
+using Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Configuration;

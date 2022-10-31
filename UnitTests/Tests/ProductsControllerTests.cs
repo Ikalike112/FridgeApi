@@ -18,8 +18,8 @@ using Filters.ActionFilters.ProductFilters;
 using Microsoft.AspNetCore.Routing;
 using System.Threading;
 using Xunit;
-using Domain;
 using Microsoft.EntityFrameworkCore;
+using Domain.Entities;
 
 namespace UnitTests.Tests
 {

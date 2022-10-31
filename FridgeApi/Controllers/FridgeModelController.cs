@@ -1,5 +1,4 @@
-﻿using Domain;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
@@ -9,6 +8,7 @@ using Application.Contracts.FridgeModels;
 using Application.Queries.FridgeModels;
 using Application.Commands.FridgeModels;
 using Application.Contracts.Fridges;
+using Domain.Entities;
 
 namespace FridgeApi.Controllers
 {

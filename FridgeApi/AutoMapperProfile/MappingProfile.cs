@@ -4,7 +4,7 @@ using Application.Contracts.Fridges;
 using Application.Contracts.Products;
 using Application.Contracts.FridgeModels;
 using Application.Contracts.FridgeProducts;
-using Domain;
+using Domain.Entities;
 
 namespace FridgeApi.AutoMapperProfile
 {

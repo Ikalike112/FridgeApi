@@ -3,7 +3,7 @@ using Application.Contracts.Fridges;
 using Application.Queries.Fridges;
 using Application.Services.Interfaces;
 using AutoMapper;
-using Domain;
+using Domain.Entities;
 using Filters.ActionFilters.FridgeFilters;
 using MediatR;
 using Microsoft.AspNetCore.Http;

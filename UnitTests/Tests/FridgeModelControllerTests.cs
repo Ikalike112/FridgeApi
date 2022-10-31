@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Domain;
 using FridgeApi.AutoMapperProfile;
 using FridgeApi.Controllers;
 using MediatR;
@@ -27,6 +26,7 @@ using Application.Contracts.FridgeModels;
 using Application.CommandHandlers.FridgeModels;
 using Application.Contracts.Fridges;
 using Application.Commands.FridgeModels;
+using Domain.Entities;
 
 namespace UnitTests.Tests
 {

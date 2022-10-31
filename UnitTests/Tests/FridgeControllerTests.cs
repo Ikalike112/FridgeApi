@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Domain;
+using Domain.Entities;
 using Filters.ActionFilters.FridgeFilters;
 using FridgeApi.AutoMapperProfile;
 using FridgeApi.Controllers;

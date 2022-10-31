@@ -1,7 +1,7 @@
-﻿using Domain;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using System;
+using Domain.Entities;
 
 namespace Persistence.Configuration
 {

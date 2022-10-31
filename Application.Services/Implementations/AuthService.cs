@@ -1,7 +1,7 @@
 ﻿using Application.Contracts.Auth;
 using Application.Services.Interfaces;
 using AutoMapper;
-using Domain;
+using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
